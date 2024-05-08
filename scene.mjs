@@ -152,7 +152,7 @@ class Scene {
 			player_wins = null;
 		}
 
-		if (player_wins === true && my_card.getid() === 4 || player_wins === false && opp_card.getid() === 4 || player_wins === null && (my_card.getid() === 4 || opp_card.getid())) {
+		if (player_wins === true && my_card.getid() === 4 || player_wins === false && opp_card.getid() === 4 || player_wins === null && (my_card.getid() === 4 || opp_card.getid() === 4)) {
 			this.round_value+=1;
 		}
 
