@@ -138,22 +138,22 @@ class Scene {
 			this.player_will_peek = false;
 		}
 
-		if (player_wins === true && my_card.getid() === 4 || player_wins === false && opp_card.getid() === 4 || player_wins === null && (my_card.getid() === 4 || opp_card.getid() === 4)) {
-			this.round_value+=1;
+		let player_wins = null;
+		if (!forced_draw) {
+			let my_rank = my_card.getid() + (player_advantage? 2:0);
+			let opp_rank = opp_card.getid() + (opponent_advantage? 2:0);
+			console.log(my_rank, opp_rank)
+			if (my_rank > opp_rank) {
+				player_wins = !(reversed_duel && !reverse_broken)
+			} else if (my_rank < opp_rank) {
+				player_wins = (reversed_duel && !reverse_broken)
+			} else {
+				player_wins = null;
+			}
 		}
 
-		if (forced_draw) {return null;}
-
-		let my_rank = my_card.getid() + (player_advantage? 2:0);
-		let opp_rank = opp_card.getid() + (opponent_advantage? 2:0);
-		console.log(my_rank, opp_rank)
-		let player_wins = null;
-		if (my_rank > opp_rank) {
-			player_wins = !(reversed_duel && !reverse_broken)
-		} else if (my_rank < opp_rank) {
-			player_wins = (reversed_duel && !reverse_broken)
-		} else {
-			player_wins = null;
+		if (player_wins === true && my_card.getid() === 4 || player_wins === false && opp_card.getid() === 4 || player_wins === null && (my_card.getid() === 4 || opp_card.getid() === 4)) {
+			this.round_value+=1;
 		}
 
 		return player_wins;
@@ -201,13 +201,14 @@ class Scene {
 						scene.opp_score+=scene.round_value;
 						scene.round_value = 1;
 					} else {
-						scene.round_value++;
+						scene.round_value+=1;
 					}
 				},60*17,this)
 				setTimeout(function(scene) {
 					c.hide()
 					card.hide();
 					scene.checkwinner();
+					console.log("Раунд теперь стоит:", scene.round_value);
 				},120*17,this)
 				this.player_will_peek = false;
 				this.preview_card = null;
