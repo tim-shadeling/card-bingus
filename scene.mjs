@@ -24,7 +24,7 @@ class Scene {
 
 		this.preview_card = null;
 
-		for (let i = 0; i < this.card_amt; i++) {
+		for (let i = this.card_amt-1; i >= 0; i--) {
 			let newcard = new Card(i);
 			newcard.setpos(20+i*(this.x-this.x%this.card_amt)/this.card_amt, this.y-200);
 			newcard.setsize(this.size_mult*34, this.size_mult*45);
@@ -57,8 +57,9 @@ class Scene {
 	mouseMoveHandler(e) {
 		if (!this.controls_enabled) {return;}
 
-		for (const c of Object.values(this.cards)) {
-			c.onmousemove(e);
+		let active_card = false;
+		for (let i = this.card_amt-1; i >= 0; i--) {
+			if (this.cards[i].onmousemove(e, active_card)) {active_card = true};
 		}
 		/*for (const c of Object.values(this.opp_cards)) {
 			c.onmousemove(e);
@@ -170,7 +171,8 @@ class Scene {
 
 	mouseClickHandler(e) {
 		console.log(e);
-		for (const c of Object.values(this.cards)) {
+		for (let i = this.card_amt-1; i >= 0; i--) {
+			let c = this.cards[i];
 			if (c.onclick(e)) {
 				this.turn++;
 				this.wait(140*17);
@@ -218,11 +220,9 @@ class Scene {
 	}
 
 	drawCards(ctx) {
-		for (const c of Object.values(this.cards)) {
-			c.draw(ctx);
-		}
-		for (const c of Object.values(this.opp_cards)) {
-			c.draw(ctx);
+		for (let i = 0; i < this.card_amt; i++) {
+			this.cards[i].draw(ctx);
+			this.opp_cards[i].draw(ctx);
 		}
 	}
 }
