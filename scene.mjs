@@ -138,6 +138,10 @@ class Scene {
 			this.player_will_peek = false;
 		}
 
+		if (player_wins === true && my_card.getid() === 4 || player_wins === false && opp_card.getid() === 4 || player_wins === null && (my_card.getid() === 4 || opp_card.getid() === 4)) {
+			this.round_value+=1;
+		}
+
 		if (forced_draw) {return null;}
 
 		let my_rank = my_card.getid() + (player_advantage? 2:0);
@@ -150,10 +154,6 @@ class Scene {
 			player_wins = (reversed_duel && !reverse_broken)
 		} else {
 			player_wins = null;
-		}
-
-		if (player_wins === true && my_card.getid() === 4 || player_wins === false && opp_card.getid() === 4 || player_wins === null && (my_card.getid() === 4 || opp_card.getid() === 4)) {
-			this.round_value+=1;
 		}
 
 		return player_wins;
