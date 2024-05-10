@@ -15,8 +15,8 @@ document.addEventListener("click", function(e){TheScene.MouseClickHandler(e)}, f
 function DrawTexts(score) {
 	ctx.font = "20px Arial";
 	ctx.fillStyle = "#000000";
-	ctx.fillText("Карты противника", x-210, 35);
-	ctx.fillText("Счет: "+TheScene.player_score+":"+TheScene.opp_score, 20, 35);
+	ctx.fillText("Карты противника", x/2-90, 35);
+	//ctx.fillText("Счет: "+TheScene.player_score+":"+TheScene.opp_score, 20, 35);
 }
 
 function DrawAll() {

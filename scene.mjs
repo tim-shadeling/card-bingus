@@ -12,21 +12,21 @@ const PLAYER_CARD_OFFSET_Y = 200;
 const PLAYER_PILE_OFFSET_X = 200;
 const PLAYER_PILE_OFFSET_Y = 200;
 
-const OPP_CARD_OFFSET_X = 200;
+const OPP_CARD_OFFSET_X = 80;
 const OPP_CARD_OFFSET_Y = 50;
-const OPP_CARD_ROW_MARGIN = 60;
+const OPP_CARD_ROW_MARGIN = 50;
 const OPP_CARD_OFFSET_X_RIGHT = 40;
 const OPP_CARDS_PER_ROW = 4;
 
 const PLAYER_POINTS_OFFSET_X = 20;
-const PLAYER_POINTS_OFFSET_Y = 50;
+const PLAYER_POINTS_OFFSET_Y = 20;
 const PLAYER_POINTS_OFFSET_Y_BOTTOM = 450
-const OPP_POINTS_OFFSET_X = 100;
-const OPP_POINTS_OFFSET_Y = 50;
+const OPP_POINTS_OFFSET_X = 90;
+const OPP_POINTS_OFFSET_Y = 20;
 const OPP_POINTS_OFFSET_Y_BOTTOM = 450
 
 const ROUND_POINTS_OFFSET_X = 130;
-const ROUND_POINTS_OFFSET_Y = 400;
+const ROUND_POINTS_OFFSET_Y = 50;
 
 class Scene {
 	constructor(canvas_width, canvas_height) {
@@ -54,12 +54,12 @@ class Scene {
 													new Point(this.width - PLAYER_CARD_OFFSET_X, this.height - PLAYER_CARD_OFFSET_Y),
 														_C.CARD_AMOUNT
 		);
-		let opp_card_points_top = utils.spaceout_pt(new Point(this.width - OPP_CARD_OFFSET_X, OPP_CARD_OFFSET_Y), 
-													new Point(this.width - OPP_CARD_OFFSET_X_RIGHT, OPP_CARD_OFFSET_Y),
+		let opp_card_points_top = utils.spaceout_pt(new Point(this.width/2 - OPP_CARD_OFFSET_X, OPP_CARD_OFFSET_Y), 
+													new Point(this.width/2 + OPP_CARD_OFFSET_X, OPP_CARD_OFFSET_Y),
 														_C.CARD_AMOUNT/2
 		);
-		let opp_card_points_bottom = utils.spaceout_pt(	new Point(this.width - OPP_CARD_OFFSET_X, OPP_CARD_OFFSET_Y+OPP_CARD_ROW_MARGIN), 
-														new Point(this.width - OPP_CARD_OFFSET_X_RIGHT, OPP_CARD_OFFSET_Y+OPP_CARD_ROW_MARGIN),
+		let opp_card_points_bottom = utils.spaceout_pt(	new Point(this.width/2 - OPP_CARD_OFFSET_X, OPP_CARD_OFFSET_Y+OPP_CARD_ROW_MARGIN), 
+														new Point(this.width/2 + OPP_CARD_OFFSET_X, OPP_CARD_OFFSET_Y+OPP_CARD_ROW_MARGIN),
 														_C.CARD_AMOUNT/2
 		);
 		for (let i = _C.CARD_AMOUNT-1; i >= 0; i--) {
@@ -81,8 +81,8 @@ class Scene {
 
 		this.point_indicators = {
 			"player_score" : utils.spaceout_pt(new Point(PLAYER_POINTS_OFFSET_X, PLAYER_POINTS_OFFSET_Y), new Point(PLAYER_POINTS_OFFSET_X, PLAYER_POINTS_OFFSET_Y_BOTTOM), _C.POINTS_TO_WIN),
-			"opp_score" :  utils.spaceout_pt(new Point(OPP_POINTS_OFFSET_X, OPP_POINTS_OFFSET_Y), new Point(OPP_POINTS_OFFSET_X, OPP_POINTS_OFFSET_Y_BOTTOM), _C.POINTS_TO_WIN),
-			"round_value" :  utils.spaceout_pt(new Point(this.width/2 - ROUND_POINTS_OFFSET_X, ROUND_POINTS_OFFSET_Y), new Point(this.width/2 + ROUND_POINTS_OFFSET_X, ROUND_POINTS_OFFSET_Y), _C.POINTS_TO_WIN),
+			"opp_score" :  utils.spaceout_pt(new Point(this.width - OPP_POINTS_OFFSET_X, OPP_POINTS_OFFSET_Y), new Point(this.width - OPP_POINTS_OFFSET_X, OPP_POINTS_OFFSET_Y_BOTTOM), _C.POINTS_TO_WIN),
+			"round_value" :  utils.spaceout_pt(new Point(this.width/2 - ROUND_POINTS_OFFSET_X, this.height/2+ROUND_POINTS_OFFSET_Y), new Point(this.width/2 + ROUND_POINTS_OFFSET_X, this.height/2+ROUND_POINTS_OFFSET_Y), _C.POINTS_TO_WIN),
 		}
 		this.point_image = document.getElementById("point");
 		this.point_off_image = document.getElementById("point_off");
