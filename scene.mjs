@@ -105,13 +105,13 @@ class Scene {
 			scene.controls_enabled = true
 			if (scene.player_will_peek) {
 				scene.preview_card = scene.opp_cards[TheOpponent.Decide(scene, null)];
-				console.log("Вы подглядываете карту", scene.preview_card.name)
+				//console.log("Вы подглядываете карту", scene.preview_card.name)
 				scene.preview_card.SetSize(_C.CARD_SIZE_MULT*BASE_CARD_SIZE_X, _C.CARD_SIZE_MULT*BASE_CARD_SIZE_Y);
 				scene.preview_card.SetPos(scene.width/2+64, -180);
 				scene.preview_card.Move(scene.width/2+64,scene.height/2-200);
 			}
 		}, time, this);
-	}			
+	}	
 
 	Evaluate(my_card, opp_card) {
 		let forced_draw = false;
@@ -189,7 +189,7 @@ class Scene {
 		if (!forced_draw) {
 			let my_rank = my_card.id + (player_advantage? 2:0);
 			let opp_rank = opp_card.id + (opponent_advantage? 2:0);
-			console.log(my_rank, opp_rank)
+			//console.log(my_rank, opp_rank)
 			if (my_rank > opp_rank) {
 				player_wins = !(reversed_duel && !reverse_broken)
 			} else if (my_rank < opp_rank) {
@@ -285,7 +285,7 @@ class Scene {
 				this.turn++;
 				this.Wait(_C.WAIT_MULT*140*17);
 				c.Move(this.width/2-200,this.height/2-200);
-				console.log("Вы сыграли:", c.name);
+				//console.log("Вы сыграли:", c.name);
 				let card = this.preview_card;
 				if (!this.player_will_peek) {
 					card = this.opp_cards[TheOpponent.Decide(this, c)];
@@ -316,11 +316,11 @@ class Scene {
 					c.Hide()
 					card.Hide();
 					scene.CheckWinner();
-					console.log("Раунд теперь стоит:", scene.round_value);
+					//console.log("Раунд теперь стоит:", scene.round_value);
 				},_C.WAIT_MULT*120*17,this)
 				this.player_will_peek = false;
 				this.opp_will_peek = false;
-				this.preview_card = null;
+				//this.preview_card = null;
 				break;
 			}
 		}
