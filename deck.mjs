@@ -98,12 +98,14 @@ export default class Card {
 		this.active = false;
 	}
 
-	onmousemove(e) {
+	onmousemove(e, got_active) {
+		if (got_active) {this.active = false; return false};
 		if (this.enabled) {
 			this.active = this.ispointwithin(e.clientX, e.clientY);
 		} else {
 			this.active = false
 		}
+		return this.active;
 	}
 
 	onclick(e) {
