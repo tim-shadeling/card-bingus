@@ -104,15 +104,14 @@ class Scene {
 		setTimeout(function(scene){
 			scene.controls_enabled = true
 			if (scene.player_will_peek) {
-				scene.preview_card = scene.opp_cards[TheOpponent.decide(scene, null)];
+				scene.preview_card = scene.opp_cards[TheOpponent.Decide(scene, null)];
 				console.log("Вы подглядываете карту", scene.preview_card.name)
 				scene.preview_card.SetSize(scene.size_mult*BASE_CARD_SIZE_X, scene.size_mult*BASE_CARD_SIZE_Y);
 				scene.preview_card.SetPos(scene.x/2+64, -180);
-				scene.preview_card.setdest(scene.x/2+64,scene.y/2-200);
-				scene.preview_card.move();
+				scene.preview_card.Move(scene.x/2+64,scene.y/2-200);
 			}
 		}, time, this);
-	}	
+	}		
 
 	Evaluate(my_card, opp_card) {
 		let forced_draw = false;
