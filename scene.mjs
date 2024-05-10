@@ -297,7 +297,7 @@ class Scene {
 					},_C.WAIT_MULT*30*17,this);
 				} else {
 					setTimeout(function(scene) {
-						TheOpponent.player_choices[c.getid()] = null;
+						TheOpponent.player_choices[c.id] = null;
 						scene.winner = scene.Evaluate(c, card);
 					},_C.WAIT_MULT*30*17,this);
 				}
