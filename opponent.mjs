@@ -94,7 +94,7 @@ class Opponent {
 					for (const v of c) {
 						if (this.choices[v]) {variants.push(v);}
 					}
-					if variants.length > 0 {
+					if (variants.length > 0) {
 						choice = variants[utils.randint(0,variants.length)]
 						break;
 					}
