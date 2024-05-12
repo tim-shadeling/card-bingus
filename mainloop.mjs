@@ -1,4 +1,4 @@
-import TheScene from "./scene.mjs";
+import Scene from "./scene.mjs";
 import * as _C from "./constants.mjs";
 
 const canvas = document.getElementById("myCanvas");
@@ -8,6 +8,7 @@ const ctx = canvas.getContext("2d");
 var interval = null;
 const x = canvas.width
 const y = canvas.height
+let TheScene = null;
 
 document.addEventListener("mousemove", function(e){TheScene.MouseMoveHandler(e)}, false);
 document.addEventListener("click", function(e){TheScene.MouseClickHandler(e)}, false);
@@ -29,10 +30,14 @@ function DrawAll() {
 
 function Update() {
 	DrawAll();
-	if (TheScene.game_over) {clearInterval(interval);}
+	if (TheScene.game_over) {
+		clearInterval(interval);
+		startGame();
+	}
 }
 
 function startGame() {
+	TheScene = new Scene()
 	interval = setInterval(Update, _C.UPDATE_INTERVAL);
 }
 

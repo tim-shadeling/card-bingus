@@ -7,17 +7,18 @@ for (let i = 0; i < _C.CARD_AMOUNT; i++) {
 		"rank" : i,
 		"name" : _C.CARD_NAMES[i],
 		"image": "card_"+i,
+		"opp_image": "opp_card_"+i,
 	}
 }
 
 export default class Card extends Point {
-	constructor(def_id) {
+	constructor(def_id, owner_is_opp = false) {
 		super();
 		let def = CARD_DEFS[def_id];
 		this.id = def_id;
 		this.rank = def['rank'];
 		this.name = def['name'];
-		this.image = document.getElementById(def['image']);
+		this.image = owner_is_opp? document.getElementById(def['opp_image']):document.getElementById(def['image']);
 		this.active = false;
 		this.enabled = true;
 	}

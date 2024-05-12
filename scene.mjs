@@ -28,7 +28,7 @@ const OPP_POINTS_OFFSET_Y_BOTTOM = 450
 const ROUND_POINTS_OFFSET_X = 130;
 const ROUND_POINTS_OFFSET_Y = 50;
 
-class Scene {
+export default class Scene {
 	constructor(canvas_width, canvas_height) {
 		this.controls_enabled = true;
 		this.frames_to_wait = 0;
@@ -69,7 +69,7 @@ class Scene {
 			//newcard.setdest(this.width/2-200,this.height/2-200);
 			this.cards[i] = newcard;
 
-			newcard = new Card(i);
+			newcard = new Card(i, true);
 			if (i < _C.CARD_AMOUNT/2) {
 				newcard.SetPos(opp_card_points_top[i].x, opp_card_points_top[i].y)
 			} else {
@@ -291,6 +291,7 @@ class Scene {
 					card = this.opp_cards[TheOpponent.Decide(this, c)];
 					setTimeout(function(scene) {
 						card.SetSize(_C.CARD_SIZE_MULT*BASE_CARD_SIZE_X, _C.CARD_SIZE_MULT*BASE_CARD_SIZE_Y);
+						card.image = document.getElementById("card_"+card.id);
 						card.SetPos(scene.width/2+64, -180);
 						card.Move(scene.width/2+64,scene.height/2-200);
 						scene.winner = scene.Evaluate(c, card);
@@ -329,6 +330,3 @@ class Scene {
 		}*/
 	}
 }
-
-let TheScene = new Scene();
-export default TheScene;
