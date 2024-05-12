@@ -105,7 +105,7 @@ export default class Scene {
 		setTimeout(function(scene){
 			scene.controls_enabled = true
 			if (scene.player_will_peek) {
-				scene.preview_card = scene.opp_cards[this.opp.Decide(scene, null)];
+				scene.preview_card = scene.opp_cards[scene.opp.Decide(scene, null)];
 				//console.log("Вы подглядываете карту", scene.preview_card.name)
 				scene.preview_card.SetSize(_C.CARD_SIZE_MULT*BASE_CARD_SIZE_X, _C.CARD_SIZE_MULT*BASE_CARD_SIZE_Y);
 				scene.preview_card.image = document.getElementById("card_"+scene.preview_card.id);
@@ -303,7 +303,7 @@ export default class Scene {
 					},_C.WAIT_MULT*30*17,this);
 				} else {
 					setTimeout(function(scene) {
-						this.opp.player_choices[c.id] = null;
+						scene.opp.player_choices[c.id] = null;
 						scene.winner = scene.Evaluate(c, card);
 					},_C.WAIT_MULT*30*17,this);
 				}
