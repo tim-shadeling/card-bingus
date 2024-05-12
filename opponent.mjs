@@ -68,7 +68,7 @@ const counters_buffed = [
 const safe_options = 		[	[0,	3],	[4,	2, 6],	5,	1,	7,	];
 const safe_options_buffed = [	5,	0,	2,	4,	3,	1,	7,	6	];
 
-class Opponent {
+export default class Opponent {
 	constructor() {
 		this.choices = {}
 		this.player_choices = {}
@@ -79,6 +79,8 @@ class Opponent {
 	}
 
 	Decide(scene, player_card) {
+		console.log("Мои карты:", this.choices)
+		//console.log(this.player_choices)
 		let choice = null;
 		let my_advantage = (scene.opp_has_advantage? 1:0);
 		let player_advantage = (scene.player_has_advantage? 2:0);
@@ -129,7 +131,7 @@ class Opponent {
 				if (x === null) {continue;}
 				for (const [player_c, y] of Object.entries(this.player_choices)) {
 					if (y === null) {continue;}
-					if (deciding_table[opp_c][player_c] == true) {counter++;}
+					if (deciding_table[opp_c][player_c] === true) {counter++;}
 				}
 				if (counter > best_count) {
 					best_card = opp_c;
@@ -146,7 +148,7 @@ class Opponent {
 			let sums = {};
 			for (const [k,v] of Object.entries(this.choices)){
 				if (v != null) {
-					this.choices[k] = neuron[k];
+					//this.choices[k] = neuron[k];
 					sums[k] = last_sum + neuron[k];
 					last_sum+=neuron[k];
 				} 
@@ -165,6 +167,3 @@ class Opponent {
 		return choice;
 	}
 }
-
-let TheOpponent = new Opponent();
-export default TheOpponent;

@@ -1,6 +1,6 @@
 import Card from "./card.mjs";
 import Point from "./point.mjs";
-import TheOpponent from "./opponent.mjs";
+import Opponent from "./opponent.mjs";
 import * as _C from "./constants.mjs";
 import * as utils from "./utils.mjs";
 
@@ -36,6 +36,7 @@ export default class Scene {
 		this.height = window.innerHeight
 
 		this.turn = 0;
+		this.opp = new Opponent();
 
 		this.cards = {};
 		this.opp_cards = {};
@@ -104,7 +105,7 @@ export default class Scene {
 		setTimeout(function(scene){
 			scene.controls_enabled = true
 			if (scene.player_will_peek) {
-				scene.preview_card = scene.opp_cards[TheOpponent.Decide(scene, null)];
+				scene.preview_card = scene.opp_cards[this.opp.Decide(scene, null)];
 				//console.log("Вы подглядываете карту", scene.preview_card.name)
 				scene.preview_card.SetSize(_C.CARD_SIZE_MULT*BASE_CARD_SIZE_X, _C.CARD_SIZE_MULT*BASE_CARD_SIZE_Y);
 				scene.preview_card.image = document.getElementById("card_"+scene.preview_card.id);
@@ -201,7 +202,10 @@ export default class Scene {
 		}
 
 		if (my_card.id!=5 && opp_card.id!=5) {
-			if (player_wins === true && my_card.id === 4 || player_wins === false && opp_card.id === 4 || player_wins === null && (my_card.id === 4 || opp_card.id === 4)) {
+			if (player_wins != false && my_card.id === 4) {
+				this.round_value+=1;
+			}
+			if (player_wins != true && opp_card.id === 4) {
 				this.round_value+=1;
 			}
 		}
@@ -289,7 +293,7 @@ export default class Scene {
 				//console.log("Вы сыграли:", c.name);
 				let card = this.preview_card;
 				if (!this.player_will_peek) {
-					card = this.opp_cards[TheOpponent.Decide(this, c)];
+					card = this.opp_cards[this.opp.Decide(this, c)];
 					setTimeout(function(scene) {
 						card.SetSize(_C.CARD_SIZE_MULT*BASE_CARD_SIZE_X, _C.CARD_SIZE_MULT*BASE_CARD_SIZE_Y);
 						card.image = document.getElementById("card_"+card.id);
@@ -299,7 +303,7 @@ export default class Scene {
 					},_C.WAIT_MULT*30*17,this);
 				} else {
 					setTimeout(function(scene) {
-						TheOpponent.player_choices[c.id] = null;
+						this.opp.player_choices[c.id] = null;
 						scene.winner = scene.Evaluate(c, card);
 					},_C.WAIT_MULT*30*17,this);
 				}
