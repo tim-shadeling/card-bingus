@@ -107,7 +107,7 @@ export default class Scene {
 				scene.preview_card = scene.opp_cards[TheOpponent.Decide(scene, null)];
 				//console.log("Вы подглядываете карту", scene.preview_card.name)
 				scene.preview_card.SetSize(_C.CARD_SIZE_MULT*BASE_CARD_SIZE_X, _C.CARD_SIZE_MULT*BASE_CARD_SIZE_Y);
-				scene.preview_card.image = document.getElementById("card_"+card.id);
+				scene.preview_card.image = document.getElementById("card_"+scene.preview_card.id);
 				scene.preview_card.SetPos(scene.width/2+64, -180);
 				scene.preview_card.Move(scene.width/2+64,scene.height/2-200);
 			}
