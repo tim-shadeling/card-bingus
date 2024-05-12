@@ -94,8 +94,10 @@ class Opponent {
 					for (const v of c) {
 						if (this.choices[v]) {variants.push(v);}
 					}
-					choice = variants[utils.randint(0,variants.length)]
-					break;
+					if variants.length > 0 {
+						choice = variants[utils.randint(0,variants.length)]
+						break;
+					}
 				}
 			}
 			console.log("В ответ на карту", player_card.id, "сыграю", choice);
